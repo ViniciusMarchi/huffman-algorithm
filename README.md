@@ -15,8 +15,8 @@ Algoritmo de Huffman utiliza um método de compressão de arquivos baseado na pr
 Nessa implementação o algoritmo de Huffman é regido pelo conceito de busca digital, descrito por uma árvore digital (Digital Search Tree), oque permitirá a compressão e descompressão de arquivos de texto (`.txt`).
 
 Tal implementação recebe um arquivo como entrada, um arquivo `.txt` que será comprimido, e gera dois arquivos como saída:
-* `comprimido.txt`: representa o arquivo comprimido, em binário. Esse arquivo é resultante da execução do algoritmo de Huffman sobre o arquivo de *entrada*.
-* `descomprimido.txt`: representa o arquivo descomprimido. Esse arquivo é o resultado da aplicação do algortimo de Huffmam sobre o arquivo `comprimido.txt`. Ou seja, é a descompressão. Esse arquivo funciona como validação, pois, se o algoritmo executou o processo corretamente de compressão/descompressão tal arquivo deve ser *exatamente* igual ao arquivo utilizado como *entrada* para compressão.
+* `comprimido.txt`: representa o arquivo comprimido, em binário. Esse arquivo é resultante da execução do algoritmo de Huffman sobre o arquivo de **entrada**.
+* `descomprimido.txt`: representa o arquivo descomprimido. Esse arquivo é o resultado da aplicação do algortimo de Huffmam sobre o arquivo `comprimido.txt`. Ou seja, é a descompressão. Esse arquivo funciona como validação, pois, se o algoritmo executou o processo corretamente de compressão/descompressão tal arquivo deve ser *exatamente* igual ao arquivo utilizado como **entrada** para compressão.
 
 
 # Como utilizar

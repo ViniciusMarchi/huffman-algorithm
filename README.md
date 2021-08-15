@@ -1,5 +1,5 @@
 # Tabela de conteúdos
-   * [Introdução](#Introdução-algoritmo-de-Huffman)
+   * [Introdução](#Introdução---algoritmo-de-Huffman)
    * [Funcionalidades](#Funcionalidades)
    * [Como utilizar](#Como-utilizar)
       * [Compilando arquivos](#Compilando-arquivos) 

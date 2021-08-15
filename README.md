@@ -1,5 +1,5 @@
 # Tabela de conteúdos
-   * [Introdução](#introdução)
+   * [Introdução](#Introdução-algoritmo-de-Huffman)
    * [Funcionalidades](#Funcionalidades)
    * [Como utilizar](#Como-utilizar)
       * [Compilando arquivos](#Compilando-arquivos) 
@@ -11,7 +11,7 @@ Implementação do Algoritmo de compressão Huffman em C++
 
 Algoritmo de Huffman utiliza um método de compressão de arquivos baseado na probabilidade de ocorrencia dos caracteres.
 
-# #Funcionalidades
+# Funcionalidades
 Nessa implementação o algoritmo de Huffman é regido pelo conceito de busca digital, descrito por uma árvore digital (Digital Search Tree), oque permitirá a compressão e descompressão de arquivos de texto (`.txt`).
 
 Tal implementação recebe um arquivo como entrada, um arquivo `.txt` que será comprimido, e gera dois arquivos como saída:

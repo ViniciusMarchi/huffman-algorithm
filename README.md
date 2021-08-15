@@ -45,4 +45,4 @@ Após a compilação basta executar o arquivo compilado passando como parâmetro
   ./compilado input.txt
   ~~~
 
-Atenção: caso o arquivo a ser compactado não esteja no mesmo diretório onde o arquivo `compilado` esteja sendo executado, o caminho (path), passado como parâmetro, deve ser especificado detalhadamente.
+Caso o arquivo passo como parâmetro não se encontre no mesmo diretório do `compilado`, o caminho (_path_) deve ser especificado completamente.

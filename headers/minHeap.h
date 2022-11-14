@@ -1,28 +1,27 @@
-#include "no.h"
+#include "node.h"
 #include <unordered_map>
 using namespace std;
 
 class MinHeap{
-    private:
-        int elementsQty; // current size (number of elements)
-        int max; // max size
-        No** pointerArr; // array of pointers of Node type
+  private:
+    int elementsQty; // current size (number of elements)
+    int max; // max size
+    Node** pointerArr; // array of pointers of Node type
 
-    public:
+  public:
+    /*
+      * Build a heap receiving the size, the text and the map structure that stores
+      * occurrence frequency of each character in text
+    */
+    MinHeap(unordered_map<char, int>);
+    
+    // Due dinamic array alocation, exists a destructor to desalocate memory
+    ~MinHeap();
 
-        /*
-         * Build a heap receiving the size, the text and the map structure that stores
-         * occurrence frequency of each character in text
-        */
-        MinHeap(unordered_map<char, int>);
-        
-        // Due dinamic array alocation, exists a destructor to desalocate memory
-        ~MinHeap();
-
-        void goUp(int);
-        void goDown(int);
-        void buildHeap();
-        void insert(No*);
-        No* removeMin();
-        bool isLeaf(No*);
+    void goUp(int);
+    void goDown(int);
+    void buildHeap();
+    void insert(Node*);
+    Node* removeMin();
+    bool isLeaf(Node*);
 };

@@ -1,23 +1,24 @@
-#include "minHeap.h"
+#include "../headers/minHeap.h"
 
-// Construtor
+// MinHeap Construtor
 MinHeap::MinHeap(unordered_map<char, int> freq){
     this->max = freq.size();
     this->vetorPonteiros = new No*[max];
     int aux = 0;
-    // Itera o Map e para cada caractere cria um No com sua respectiva frequência
+    
+    // Iterate Maps and for each character create a new Node containing your respective frequency
     for(auto item : freq){
             if(aux < max){
                 vetorPonteiros[aux] = new No(item.first, item.second);
                 aux++;
             }
     } 
-    // A heap ficará cheia
+    // The heap will stay full
     this->numElementos = max;
     construirHeap();
 }
 
-// Constrói a Heap
+// Build the MinHeap
 void MinHeap::construirHeap(){
     int ultimo = numElementos/2-1;
 
@@ -26,7 +27,7 @@ void MinHeap::construirHeap(){
     }
 }
 
-// Insere um Nó na MinHeap
+// Insert a Node
 void MinHeap::inserir(No* no){
  if(numElementos < max){ // tem espaço na heap
         vetorPonteiros[numElementos] = no;
@@ -35,7 +36,8 @@ void MinHeap::inserir(No* no){
     }
 }
 
-// Remove o Nó com menor frequência da MinHeap
+
+// Remove the Node with lowest frequency
 No* MinHeap::remover(){
     No* removido = 0;
     if (numElementos > 0){ // tem alguém para remover
@@ -47,22 +49,21 @@ No* MinHeap::remover(){
     return removido;
 }
 
-
-// Método que desce um elemento no heap, algoritmo como o apresentado em aula
+// This function go down one element in heap
 void MinHeap::descer(int indice){
+    int j; // j represents the child
 
-    int j; // j representa o filho
-
-    // Calcula o indice do filho da esquerda
+    // Comput the left child index
     j = (2 * indice + 1);
 
     if (j < numElementos){
         if (j+1 < numElementos){
             if (vetorPonteiros[j+1]->getFreq() < vetorPonteiros[j]->getFreq()){
-                j++; // agora j é o indice do menor filho
+                j++; // noew j is the index of smaller child
             }
         }
-        // Verifica se o pai é maior que o menor dos filhos
+
+        // Check if parent is bigger than the smaller child
         if (vetorPonteiros[indice]->getFreq() > vetorPonteiros[j]->getFreq()){
             No* aux = vetorPonteiros[indice];
             vetorPonteiros[indice] = vetorPonteiros[j];
@@ -73,15 +74,16 @@ void MinHeap::descer(int indice){
 }
 
 
-// Método subir como apresentado em aula
+// This function go up in heap structure
 void MinHeap::subir(int indice){
      int j;
 
-    // Verifico se não cheguei na raiz
+    // Check if is not root, ie I didn't arrived at the top of the structure
     if (indice > 0){
-        // Calculo o indice do pai
+        // Compute parent index
         j = (indice - 1)/2;
-        // Verifico se o filho é maior que o pai, se for viola a restrição e preciso trocar
+        // Check if the child are bigger than parent. In positive case violates the MinHeap
+        // restriction and need swap
         if (vetorPonteiros[indice]->getFreq() < vetorPonteiros[j]->getFreq()){
             No* aux = vetorPonteiros[indice];
             vetorPonteiros[indice] = vetorPonteiros[j];
@@ -91,7 +93,7 @@ void MinHeap::subir(int indice){
     }
 }
 
-// Retorna se um no é folha
+// Retorna a bool that represents if a Node is a leaf
 bool MinHeap::folha(No* no){
     bool noFolha = false;
     if(no->getEsq() && no->getDir()){
@@ -100,6 +102,7 @@ bool MinHeap::folha(No* no){
     return noFolha;
 }
 
+// Destructor
 MinHeap::~MinHeap(){
     delete[] vetorPonteiros;
 }

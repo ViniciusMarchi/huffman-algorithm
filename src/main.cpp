@@ -1,4 +1,4 @@
-#include "huffman.h"
+#include "../headers/huffman.h"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -6,35 +6,37 @@
 using namespace std;
 
 int main(int argc, char **argv) { 
-    // variavel que armazenará o texto lido do arquivo
+    // stores the input text
     string texto;
     
     if(argc > 1){
-        // Utilizando um buffer o arquivo é lido
+        // capture text file from user
         ifstream ArquivoEntrada(argv[1]);
-        // Verificando se é um arquivo válido
+        // check if file is valid
         if(ArquivoEntrada){
+            // read text file
             std::stringstream buffer;
             buffer << ArquivoEntrada.rdbuf();
             texto = buffer.str();
             ArquivoEntrada.close();
         
-            // Instanciando o algoritmo de Huffman
+            // instance the Huffman structure
             Huffman * algoritmoHuffman = new Huffman(texto);
             string textoComprimido = algoritmoHuffman->getStringCodificada();
             string textoDescomprimido = algoritmoHuffman->getStringDecodificada();
             
 
-            // Criando e preenchendo os arquivos que conterão os resultados do algoritmo
+            // create and write output file that will contain the encoded text.
             ofstream ArquivoComprimido("comprimido.txt");
             ArquivoComprimido << textoComprimido;
             ArquivoComprimido.close();
 
+            // create and write output file that will contain the decoded text.
             ofstream ArquivoDescomprimido("descomprimido.txt");
             ArquivoDescomprimido << textoDescomprimido;
             ArquivoDescomprimido.close();
 
-            // Taxa de compressão obtida
+            // Compression ratio
             cout << "TAXA DE COMPRESSAO: " << algoritmoHuffman->getTaxaCompressao() << "%";
             // Destrói a estrutura
             algoritmoHuffman->~Huffman();

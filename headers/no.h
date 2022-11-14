@@ -1,8 +1,8 @@
-// Definição da classe Nó utilizado nas estruturas: MinHeap e Árvore de Huffman. 
-class No{
+// Definition of Node strucutre used in MinHeap and Huffman tree structures.
+class No {
     private:
-        char info; // informação armazenada
-        int freq;  // frequência do caractere
+        char info; // character
+        int freq;  // character frequency
         No* esq;
         No* dir;
 

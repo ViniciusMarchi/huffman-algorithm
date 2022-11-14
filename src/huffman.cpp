@@ -1,20 +1,20 @@
-#include "huffman.h"
+#include "../headers/huffman.h"
 
-// Construtor
+// Huffman Costructor
 Huffman::Huffman(string texto) { 
-    // Constrói um Map relacionando cada caractere encontrado no texto com sua respectiva frequência de aparições
+    // Create a Map relating each character found in the text to its respective appearance frequency
     unordered_map<char, int> freq = contaFrequencia(texto);
 
-    // Constrói e utiliza a estrutura de Huffman 
+    // Build huffman structure
     raiz = constroiHuffman(freq);
     stringCodificada = codificaString(texto);
     stringDecodificada = decodificaString(stringCodificada);
     taxaCompressao = calculaTaxa(stringCodificada, stringDecodificada);
 } 
 
-// Constrói a Árvore de Huffman de acordo com o pseudo-código exibido durante a aula
+// This function build a Huffman Tree
 No* Huffman::constroiHuffman(unordered_map<char, int> freq){
-    // Cria a MinHeap
+    // build a minheap
     MinHeap * minheap = new MinHeap(freq);
     int tamanho = freq.size() - 1;
     for(int i = 0; i < tamanho; i++){
@@ -28,17 +28,18 @@ No* Huffman::constroiHuffman(unordered_map<char, int> freq){
     }
     No * aux = minheap->remover();
 
-    // Invoca o Destrutor da MinHeap porque a estrutura de Huffman ja está criada
+    // Call destructor of MinHeap because the Huffman structure always been created
     minheap->~MinHeap();
     return aux;
 }
 
+// This function encode the string using the Huffman table
 string Huffman::codificaString(string stringInicial){
-    // Cria a tabela de Huffman
+    // Create Huffman table
     unordered_map<char, string> tabelaHuffman;
     criaTabelaDeHuffman(raiz, "", tabelaHuffman);
 
-    // Realiza a codificação utilizando a tabela criada
+    // Encode string
     string textoCodificado = "";
     for (char caractere: stringInicial) {
         textoCodificado = textoCodificado + tabelaHuffman[caractere];
@@ -46,8 +47,8 @@ string Huffman::codificaString(string stringInicial){
     return textoCodificado;
 }
 
-// Assim como na codificação da string, aqui também se percorre a árvore de Huffman, mas dessa vez utilizando uma  abordagem
-// iterativa (não recursiva) para possibilitar percorrer não só a árvore, mas também  a string a ser decodificada.
+
+// Decode string function
 string Huffman::decodificaString(string stringCodificada) {
     string stringDecodificada = "";
     No* aux = raiz;
@@ -68,17 +69,23 @@ string Huffman::decodificaString(string stringCodificada) {
 }
 
 
-// Para codificar é necessário, dada a árvore construida, conhecer para cada caractere qual será sua codificação em bits.
-// Isso é feito nesse algoritmo, percorrendo a árvore de Huffman em pre-ordem e considerando que o filho esquerdo de cada No
-// é represetado por "0" e o direito por "1".
-// Como resultando tudo é armazenado em um Map, onde a key é um caractere e o valor a sequencia de bits que o representa.
+/*
+ * This function create the Huffman table.
+
+ * To encode string is necessary, given the constructed huffman tree, to know to each character
+ * which will be your encoding in bits. This is done traversing the Huffman tree in preorder and
+ * considering that the left child of each Node is represented by "0" and the right child by "1".
+
+ * As a result everything is stored in a Map structure, where the key is a character and the value
+ * are the bit sequence that represents this.
+*/
 void Huffman::criaTabelaDeHuffman(No* no, string aux, unordered_map<char, string> &tabelaHuffman) {
-    // caso base da recursão
+    // recursion base case
     if (no == 0){
         return;
     }
  
-    // se o No atual é uma folha
+    // if the current Node is a leaf
     if (folha(no)) {
         tabelaHuffman[no->getInfo()] = aux;
     }
@@ -87,8 +94,11 @@ void Huffman::criaTabelaDeHuffman(No* no, string aux, unordered_map<char, string
     criaTabelaDeHuffman(no->getDir(), aux + "1", tabelaHuffman);
 }
 
-// Para cada caractere conta sua frequência no texto.
-// Os dados são armazenados em um Map, onde o par chave:valor são caractere:frequência
+
+/*
+ * This function count each character occurrence in text and store data
+ * in Map structure where the pair key:value are represented by character:occurence
+*/
 unordered_map<char, int> Huffman::contaFrequencia(string texto){
     string aux = texto;
     unordered_map<char, int> freq;
@@ -98,7 +108,7 @@ unordered_map<char, int> Huffman::contaFrequencia(string texto){
     return freq;
 }
 
-// Verifica se o No é uma folha
+// Check if a Node is a leaf
 bool Huffman::folha(No* no) { 
 	if(no->getEsq() == 0 && no->getDir() == 0){
         return true;
@@ -106,6 +116,7 @@ bool Huffman::folha(No* no) {
     return false;
 }
 
+// This functions compute the compression ratio.
 float Huffman::calculaTaxa(string codificada, string decodificada){
     float tamCodificada = codificada.size();
     float tamDecodificada = decodificada.size();
@@ -115,12 +126,12 @@ float Huffman::calculaTaxa(string codificada, string decodificada){
 }
 
 
-// Destrutor
+// Huffman Destructor
 Huffman::~Huffman(){
     deletaEstrutura(raiz);
 }
 
-// Código que destrói a estrutura de Huffman baseado no código destruro visto na aula de Avl
+// Desctruc the Huffman structure
 void Huffman::deletaEstrutura(No* no) {
 	if(no != 0){
 		deletaEstrutura(no->getEsq());
@@ -129,7 +140,7 @@ void Huffman::deletaEstrutura(No* no) {
 	}
 }
 
-// Getters
+// Getters functions
 string Huffman::getStringCodificada(){
     return stringCodificada;
 }

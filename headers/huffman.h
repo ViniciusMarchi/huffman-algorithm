@@ -2,11 +2,13 @@
 #include <unordered_map>
 #include <string>
 
-// Definição da classe responsável por construir a Árvore de Huffman com auxílio da MinHeap.
-// Após sua criação a árvore é utilizada para codificar e decodificar um texto.
+/*
+ * This class define Huffman Tree structure using MinHeap and functions to use it.
+ * After creation, the Huffman Structure are used to encode and decode a text.
+*/
 class Huffman {
     private:
-        No* raiz; // No que armazena a raiz da estrutura de Huffman
+        No* raiz; // Node that stores the root of Huffman Structure
         string stringCodificada;
         string stringDecodificada;
         float taxaCompressao;
@@ -15,18 +17,18 @@ class Huffman {
         Huffman(string);
         ~Huffman();
         
-        // Constrói a estrutura
+        // Build the structure
         No* constroiHuffman(unordered_map<char, int>);
         unordered_map<char, int> contaFrequencia(string);
 
-        // Codifica a string que representa o texto
+        // Encode string
         string codificaString(string);
         void criaTabelaDeHuffman(No*, string, unordered_map<char, string>&);
        
-        // Decodifica a string
+        // Decode string
         string decodificaString(string);
         
-        // Calcula a taxa de compressão
+        // Compute compression ratio
         float calculaTaxa(string, string);
         
         bool folha(No*);

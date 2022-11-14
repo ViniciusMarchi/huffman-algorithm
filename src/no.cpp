@@ -1,7 +1,6 @@
-// Implementação da classe Nó
-#include "no.h"
+#include "../headers/no.h"
 
-// Construtores
+// Constructor
 No::No (char info, int freq){
     esq = dir = 0;
     this->freq = freq;

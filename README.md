@@ -1,48 +1,49 @@
-# Tabela de conteúdos
-   * [Introdução](#Introdução---algoritmo-de-Huffman)
-   * [Funcionalidades](#Funcionalidades)
-   * [Como utilizar](#Como-utilizar)
-      * [Compilando arquivos](#Compilando-arquivos) 
-      * [Executando o algoritmo](#Executando-o-algoritmo)
+<p align="center">
+  <a href="./README_pt-BR.md">Portuguese Version </a>
+  <span>:brazil:</span>
+</p>
+
+# Table of Contents
+  * [Introduction](#Introduction---huffman-algorithm)
+  * [Features](#Features)
+  * [How to use](#How-to-use)
+    * [Compiling files](#Compiling-files) 
+    * [Run algorithm](#Run-algorithm)
+
+# Introduction - Huffman Algorithm
+Implementation of Compression Huffman Algorithm in C++
+
+Huffman's algorithm uses a file compression method based on the probability of occurrence of characters in text.
+
+# Features
+In this implementation the Huffman Algorithm is defined by the concept of digital search, described by Digital Search Tree, which will allow the *compression* and *decompression* of text files (`.txt`).
 
 
-# Introdução - Algoritmo De Huffman
-Implementação do Algoritmo de compressão Huffman em C++
+This code will receive a input file, a `.txt` file which will be compressed, and generates two files as output:
+  * `encoded.txt`: represents the compressed file, in binary. This file is the result of running Huffman's algorithm on the **input** file.
+  * `decoded.txt`: represents the decoded file. This file is the result of applying Huffman's algorithm on the `encoded.txt` file. In other words, it's decompression. This file works as a validation, because if the algorithm performed the compression/decompression process correctly, this file must be *exactly* equal to the file used as **input** for compression.
 
-Algoritmo de Huffman utiliza um método de compressão de arquivos baseado na probabilidade de ocorrencia dos caracteres.
+# How to use
+To run code just compile the files contained in `src` folder. To do this, perform the following simple steps
 
-# Funcionalidades
-Nessa implementação o algoritmo de Huffman é regido pelo conceito de busca digital, descrito por uma árvore digital (Digital Search Tree), oque permitirá a compressão e descompressão de arquivos de texto (`.txt`).
-
-Tal implementação recebe um arquivo como entrada, um arquivo `.txt` que será comprimido, e gera dois arquivos como saída:
-* `comprimido.txt`: representa o arquivo comprimido, em binário. Esse arquivo é resultante da execução do algoritmo de Huffman sobre o arquivo de **entrada**.
-* `descomprimido.txt`: representa o arquivo descomprimido. Esse arquivo é o resultado da aplicação do algortimo de Huffmam sobre o arquivo `comprimido.txt`. Ou seja, é a descompressão. Esse arquivo funciona como validação, pois, se o algoritmo executou o processo corretamente de compressão/descompressão tal arquivo deve ser *exatamente* igual ao arquivo utilizado como **entrada** para compressão.
-
-
-# Como utilizar
-Para executar o código basta compilar os arquivos contidos na pasta `src`. Para isso, execute os seguintes passos
-
-## Compilando arquivos
-* Clone o repositório
-  ~~~bash
+## Compiling files
+* Clone repository
+  ```bash
   git clone https://github.com/ViniciusMarchi/algoritmo-huffman.git
-  ~~~
+  ```
 
-
-* navegue até a pasta do projeto
-  ~~~bash
+* Go to project folder
+  ```bash
   cd algoritmo-huffman
-  ~~~
+  ```
 
-* compile os arquivos contidos no diretório `src` utilizando g++ com o seguinte comando:
-  ~~~bash
-  g++ -o compilado src/*.cpp
-  ~~~
+* Compile the file contained in `src` directory using `g++` with the following command:
+  ```bash
+  g++ -o compilled src/*.cpp
+  ```
 
-## Executando o algoritmo
-Após a compilação basta executar o arquivo compilado passando como parâmetro o diretório onde se encontra o arquivo `.txt` que será compactado, por exemplo.
-  ~~~bash
-  ./compilado input.txt
-  ~~~
-
-Caso o arquivo passo como parâmetro não se encontre no mesmo diretório do `compilado`, o caminho (_path_) deve ser especificado completamente.
+## Run algorithm
+After compiling, just run the compiled file, passing as a parameter the `.txt` input file to be compressed, for example.
+```bash
+./compilled input.txt
+```

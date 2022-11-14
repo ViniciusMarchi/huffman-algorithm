@@ -6,27 +6,27 @@ Huffman::Huffman(string texto) {
     unordered_map<char, int> freq = contaFrequencia(texto);
 
     // Build huffman structure
-    raiz = constroiHuffman(freq);
-    stringCodificada = codificaString(texto);
-    stringDecodificada = decodificaString(stringCodificada);
-    taxaCompressao = calculaTaxa(stringCodificada, stringDecodificada);
+    root = buildHuffman(freq);
+    encodedString = encodeString(texto);
+    decodedString = decodeString(encodedString);
+    compressionRatio = computeCompressionRatio(encodedString, decodedString);
 } 
 
 // This function build a Huffman Tree
-No* Huffman::constroiHuffman(unordered_map<char, int> freq){
+No* Huffman::buildHuffman(unordered_map<char, int> freq){
     // build a minheap
     MinHeap * minheap = new MinHeap(freq);
     int tamanho = freq.size() - 1;
     for(int i = 0; i < tamanho; i++){
         No* z = new No();
-        z->setEsq(minheap->remover());
-        z->setDir(minheap->remover());
-        int x = z->getEsq()->getFreq();
-        int y = z->getDir()->getFreq();        
+        z->setLeft(minheap->removeMin());
+        z->setRight(minheap->removeMin());
+        int x = z->getLeft()->getFreq();
+        int y = z->getRight()->getFreq();        
         z->setFreq(x+y);
-        minheap->inserir(z);
+        minheap->insert(z);
     }
-    No * aux = minheap->remover();
+    No * aux = minheap->removeMin();
 
     // Call destructor of MinHeap because the Huffman structure always been created
     minheap->~MinHeap();
@@ -34,10 +34,10 @@ No* Huffman::constroiHuffman(unordered_map<char, int> freq){
 }
 
 // This function encode the string using the Huffman table
-string Huffman::codificaString(string stringInicial){
+string Huffman::encodeString(string stringInicial){
     // Create Huffman table
     unordered_map<char, string> tabelaHuffman;
-    criaTabelaDeHuffman(raiz, "", tabelaHuffman);
+    createHuffmanTable(root, "", tabelaHuffman);
 
     // Encode string
     string textoCodificado = "";
@@ -49,23 +49,23 @@ string Huffman::codificaString(string stringInicial){
 
 
 // Decode string function
-string Huffman::decodificaString(string stringCodificada) {
-    string stringDecodificada = "";
-    No* aux = raiz;
-    int tam = (int) stringCodificada.size() + 1;
+string Huffman::decodeString(string encodedString) {
+    string decodedString = "";
+    No* aux = root;
+    int tam = (int) encodedString.size() + 1;
     for(int i = 0; i < tam; i++){   
-        if (folha(aux)){
-            stringDecodificada = stringDecodificada + aux->getInfo();
-            aux = raiz;
+        if (isLeaf(aux)){
+            decodedString = decodedString + aux->getInfo();
+            aux = root;
         }
     
-        if (stringCodificada[i] =='0'){
-            aux = aux->getEsq();
+        if (encodedString[i] =='0'){
+            aux = aux->getLeft();
         } else {
-            aux = aux->getDir();
+            aux = aux->getRight();
         }
     }
-    return stringDecodificada;
+    return decodedString;
 }
 
 
@@ -79,19 +79,19 @@ string Huffman::decodificaString(string stringCodificada) {
  * As a result everything is stored in a Map structure, where the key is a character and the value
  * are the bit sequence that represents this.
 */
-void Huffman::criaTabelaDeHuffman(No* no, string aux, unordered_map<char, string> &tabelaHuffman) {
+void Huffman::createHuffmanTable(No* no, string aux, unordered_map<char, string> &tabelaHuffman) {
     // recursion base case
     if (no == 0){
         return;
     }
  
     // if the current Node is a leaf
-    if (folha(no)) {
+    if (isLeaf(no)) {
         tabelaHuffman[no->getInfo()] = aux;
     }
  
-    criaTabelaDeHuffman(no->getEsq(), aux + "0", tabelaHuffman);
-    criaTabelaDeHuffman(no->getDir(), aux + "1", tabelaHuffman);
+    createHuffmanTable(no->getLeft(), aux + "0", tabelaHuffman);
+    createHuffmanTable(no->getRight(), aux + "1", tabelaHuffman);
 }
 
 
@@ -109,15 +109,15 @@ unordered_map<char, int> Huffman::contaFrequencia(string texto){
 }
 
 // Check if a Node is a leaf
-bool Huffman::folha(No* no) { 
-	if(no->getEsq() == 0 && no->getDir() == 0){
+bool Huffman::isLeaf(No* no) { 
+	if(no->getLeft() == 0 && no->getRight() == 0){
         return true;
     }
     return false;
 }
 
 // This functions compute the compression ratio.
-float Huffman::calculaTaxa(string codificada, string decodificada){
+float Huffman::computeCompressionRatio(string codificada, string decodificada){
     float tamCodificada = codificada.size();
     float tamDecodificada = decodificada.size();
     float taxa = (float) tamCodificada/(tamDecodificada * 8) * 100;
@@ -128,27 +128,27 @@ float Huffman::calculaTaxa(string codificada, string decodificada){
 
 // Huffman Destructor
 Huffman::~Huffman(){
-    deletaEstrutura(raiz);
+    deleteHuffman(root);
 }
 
 // Desctruc the Huffman structure
-void Huffman::deletaEstrutura(No* no) {
+void Huffman::deleteHuffman(No* no) {
 	if(no != 0){
-		deletaEstrutura(no->getEsq());
-		deletaEstrutura(no->getDir());
+		deleteHuffman(no->getLeft());
+		deleteHuffman(no->getRight());
 		delete no;
 	}
 }
 
 // Getters functions
-string Huffman::getStringCodificada(){
-    return stringCodificada;
+string Huffman::getEncodedString(){
+    return encodedString;
 }
 
-string Huffman::getStringDecodificada(){
-    return stringDecodificada;
+string Huffman::getDecodedString(){
+    return decodedString;
 }
 
-float Huffman::getTaxaCompressao(){
-    return taxaCompressao;
+float Huffman::getCompressionRatio(){
+    return compressionRatio;
 }

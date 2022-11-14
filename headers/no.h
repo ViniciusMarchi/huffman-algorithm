@@ -3,8 +3,8 @@ class No {
     private:
         char info; // character
         int freq;  // character frequency
-        No* esq;
-        No* dir;
+        No* left;
+        No* right;
 
     public:
         No(char, int);
@@ -13,12 +13,12 @@ class No {
         // setters
         void setInfo(char);
         void setFreq(int);
-        void setEsq(No*);
-        void setDir(No*);
+        void setLeft(No*);
+        void setRight(No*);
 
         // getters
         char getInfo();
         int getFreq();
-        No* getEsq();
-        No* getDir();
+        No* getLeft();
+        No* getRight();
 };

@@ -6,43 +6,42 @@
 using namespace std;
 
 int main(int argc, char **argv) { 
-    // stores the input text
-    string texto;
+    string inputText;
     
     if(argc > 1){
         // capture text file from user
-        ifstream ArquivoEntrada(argv[1]);
+        ifstream InputFile(argv[1]);
         // check if file is valid
-        if(ArquivoEntrada){
+        if(InputFile){
             // read text file
             std::stringstream buffer;
-            buffer << ArquivoEntrada.rdbuf();
-            texto = buffer.str();
-            ArquivoEntrada.close();
+            buffer << InputFile.rdbuf();
+            inputText = buffer.str();
+            InputFile.close();
         
             // instance the Huffman structure
-            Huffman * algoritmoHuffman = new Huffman(texto);
-            string textoComprimido = algoritmoHuffman->getStringCodificada();
-            string textoDescomprimido = algoritmoHuffman->getStringDecodificada();
+            Huffman *huffmanAlgorithm = new Huffman(inputText);
+            string encodedText = huffmanAlgorithm->getEncodedString();
+            string decodedText = huffmanAlgorithm->getDecodedString();
             
 
             // create and write output file that will contain the encoded text.
-            ofstream ArquivoComprimido("comprimido.txt");
-            ArquivoComprimido << textoComprimido;
-            ArquivoComprimido.close();
+            ofstream EncodedFile("encoded.txt");
+            EncodedFile << encodedText;
+            EncodedFile.close();
 
             // create and write output file that will contain the decoded text.
-            ofstream ArquivoDescomprimido("descomprimido.txt");
-            ArquivoDescomprimido << textoDescomprimido;
-            ArquivoDescomprimido.close();
+            ofstream DecodedFile("decoded.txt");
+            DecodedFile << decodedText;
+            DecodedFile.close();
 
             // Compression ratio
-            cout << "TAXA DE COMPRESSAO: " << algoritmoHuffman->getTaxaCompressao() << "%";
+            cout << "Compression Ratio: " << huffmanAlgorithm->getCompressionRatio() << "%\n";
             // Destrói a estrutura
-            algoritmoHuffman->~Huffman();
+            huffmanAlgorithm->~Huffman();
             return 0;         
         }
     }
-    cout << "Nenhum arquivo de entrada encontrado.";
+    cout << "Error: input file not found.";
 	return 0;
 } 

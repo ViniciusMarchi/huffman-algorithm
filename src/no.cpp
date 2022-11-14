@@ -2,13 +2,13 @@
 
 // Constructor
 No::No (char info, int freq){
-    esq = dir = 0;
+    left = right = 0;
     this->freq = freq;
     this->info = info;
 }
 
 No::No (){
-    esq = dir = 0;
+    left = right = 0;
     this->freq = 0;
     this->info = 0;
 }
@@ -22,12 +22,12 @@ void No::setFreq(int freq){
     this->freq = freq;
 }
 
-void No::setEsq(No* filhoEsq){
-    this->esq = filhoEsq;
+void No::setLeft(No* filhoEsq){
+    this->left = filhoEsq;
 }
 
-void No::setDir(No * filhoDir){
-    this->dir = filhoDir;
+void No::setRight(No * filhoDir){
+    this->right = filhoDir;
 }
 
 // Getters
@@ -39,10 +39,10 @@ int No::getFreq(){
     return this->freq;
 }
 
-No* No::getEsq(){
-    return this->esq;
+No* No::getLeft(){
+    return this->left;
 }
 
-No* No::getDir(){
-    return this->dir;
+No* No::getRight(){
+    return this->right;
 }

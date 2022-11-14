@@ -4,9 +4,9 @@ using namespace std;
 
 class MinHeap{
     private:
-        int numElementos; // current size
+        int elementsQty; // current size (number of elements)
         int max; // max size
-        No** vetorPonteiros; // array of pointers of Node type
+        No** pointerArr; // array of pointers of Node type
 
     public:
 
@@ -19,10 +19,10 @@ class MinHeap{
         // Due dinamic array alocation, exists a destructor to desalocate memory
         ~MinHeap();
 
-        void subir(int);
-        void descer(int);
-        void construirHeap();
-        void inserir(No*);
-        No* remover();
-        bool folha(No*);
+        void goUp(int);
+        void goDown(int);
+        void buildHeap();
+        void insert(No*);
+        No* removeMin();
+        bool isLeaf(No*);
 };

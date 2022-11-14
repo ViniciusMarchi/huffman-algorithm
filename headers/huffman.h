@@ -8,34 +8,34 @@
 */
 class Huffman {
     private:
-        No* raiz; // Node that stores the root of Huffman Structure
-        string stringCodificada;
-        string stringDecodificada;
-        float taxaCompressao;
+        No* root; // Node that stores the root of Huffman Structure
+        string encodedString;
+        string decodedString;
+        float compressionRatio;
 
     public:
         Huffman(string);
         ~Huffman();
         
         // Build the structure
-        No* constroiHuffman(unordered_map<char, int>);
+        No* buildHuffman(unordered_map<char, int>);
         unordered_map<char, int> contaFrequencia(string);
 
         // Encode string
-        string codificaString(string);
-        void criaTabelaDeHuffman(No*, string, unordered_map<char, string>&);
+        string encodeString(string);
+        void createHuffmanTable(No*, string, unordered_map<char, string>&);
        
         // Decode string
-        string decodificaString(string);
+        string decodeString(string);
         
         // Compute compression ratio
-        float calculaTaxa(string, string);
+        float computeCompressionRatio(string, string);
         
-        bool folha(No*);
-        void deletaEstrutura(No*);
+        bool isLeaf(No*);
+        void deleteHuffman(No*);
 
         // getters
-        string getStringCodificada();
-        string getStringDecodificada();
-        float getTaxaCompressao();
+        string getEncodedString();
+        string getDecodedString();
+        float getCompressionRatio();
 };

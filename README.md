@@ -29,12 +29,12 @@ To run code just compile the files contained in `src` folder. To do this, perfor
 ## Compiling files
 * Clone repository
   ```bash
-  git clone https://github.com/ViniciusMarchi/algoritmo-huffman.git
+  git clone git@github.com:ViniciusMarchi/huffman-algorithm.git
   ```
 
 * Go to project folder
   ```bash
-  cd algoritmo-huffman
+  cd huffman-algorithm
   ```
 
 * Compile the file contained in `src` directory using `g++` with the following command:
